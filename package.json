@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/mrverdant13/favs#readme",
   "devDependencies": {
+    "eslint": "^8.13.0",
     "nodemon": "^2.0.15"
   }
 }
