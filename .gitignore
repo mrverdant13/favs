@@ -1,0 +1,12 @@
+# Node
+node_modules/
+
+# Temp files
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Environment
+.env
