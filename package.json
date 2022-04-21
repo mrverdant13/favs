@@ -1,0 +1,18 @@
+{
+  "name": "favs",
+  "version": "0.0.1",
+  "description": "Favs App.",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrverdant13/favs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrverdant13/favs/issues"
+  },
+  "homepage": "https://github.com/mrverdant13/favs#readme"
+}
