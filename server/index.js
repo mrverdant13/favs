@@ -1,11 +1,14 @@
 const express = require('express');
-const { logErrorOnRequest } = require('./logger');
+const { logErrorOnRequest, reqLogger } = require('./logger');
 const reqIdSetter = require('./request-id');
 
 const app = express();
 
 // Set request IDs on each request.
 app.use(reqIdSetter);
+
+// Log every incoming request.
+app.use(reqLogger);
 
 app.use((_, __, next) => next({ statusCode: 404, message: 'Not Found' }));
 
