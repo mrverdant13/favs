@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "Favs App.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node index"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mrverdant13/favs.git"
