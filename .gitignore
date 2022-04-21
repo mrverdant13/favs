@@ -7,3 +7,6 @@ Thumbs.db
 
 # VSCode
 .vscode/
+
+# Environment
+.env
