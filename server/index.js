@@ -1,5 +1,5 @@
 const express = require('express');
-const logErrorOnRequest = require('./logger');
+const { logErrorOnRequest } = require('./logger');
 const reqIdSetter = require('./request-id');
 
 const app = express();

@@ -7,4 +7,4 @@ function logErrorOnRequest(req, statusCode, message, level = 'error') {
   logger[level](logMsg);
 }
 
-module.exports = logErrorOnRequest;
+module.exports = { logErrorOnRequest };
