@@ -1,5 +1,6 @@
 const express = require('express');
 const { parsePagination } = require('../../../pagination.middleware');
+const { parseSorting } = require('../../../sorting.middleware');
 const {
   listFavsLists,
   createFavsList,
@@ -7,12 +8,13 @@ const {
   removeFavsList,
   appendFavsListById,
 } = require('./controller');
+const { favsListFields } = require('./favs-list.entity');
 
 const router = express.Router();
 
 router
   .route('/') //
-  .get(parsePagination, listFavsLists)
+  .get(parsePagination, parseSorting(favsListFields), listFavsLists)
   .post(createFavsList);
 
 router

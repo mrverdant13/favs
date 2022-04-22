@@ -35,9 +35,12 @@ exports.createFavsList = async (req, res, next) => {
 
 exports.listFavsLists = async (req, res, next) => {
   try {
-    const { limit, offset } = req;
+    const { limit, offset, sortBy, direction } = req;
     const [favsListDocs, totalFavsLists] = await Promise.all([
-      FavsList.find().skip(offset).limit(limit),
+      FavsList.find()
+        .sort({ [sortBy]: direction })
+        .skip(offset)
+        .limit(limit),
       FavsList.countDocuments(),
     ]);
     res.status(200).json({ total: totalFavsLists, favsLists: favsListDocs });
