@@ -4,6 +4,9 @@ const reqIdSetter = require('./request-id');
 
 const app = express();
 
+// Process JSON payload.
+app.use(express.json());
+
 // Set request IDs on each request.
 app.use(reqIdSetter);
 
