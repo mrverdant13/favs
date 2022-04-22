@@ -32,3 +32,12 @@ exports.createFavsList = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.listFavsLists = async (_, res, next) => {
+  try {
+    const favsListDocs = await FavsList.find();
+    res.status(200).json(favsListDocs);
+  } catch (err) {
+    next(err);
+  }
+};
