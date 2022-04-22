@@ -46,3 +46,13 @@ exports.getFavsList = async (req, res) => {
   const favsListDoc = req.favsList;
   res.status(200).json(favsListDoc);
 };
+
+exports.removeFavsList = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const removedFavsList = await FavsList.findByIdAndRemove(id);
+    res.status(200).json(removedFavsList);
+  } catch (err) {
+    next(err);
+  }
+};
