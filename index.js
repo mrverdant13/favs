@@ -1,6 +1,6 @@
 const http = require('http');
 
-const { port, database: dbConnectionData } = require('./server/config');
+const { port, database: dbConnectionData } = require('./config');
 const logger = require('./logger');
 const database = require('./database');
 
