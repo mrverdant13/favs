@@ -1,8 +1,12 @@
 const http = require('http');
 
-const app = require('./server');
+const { port, database: dbConnectionData } = require('./config');
 const logger = require('./logger');
-const { port } = require('./server/config');
+const database = require('./database');
+
+database.connect({ ...dbConnectionData });
+
+const app = require('./server');
 
 const server = http.createServer(app);
 server.listen(port, () => {
