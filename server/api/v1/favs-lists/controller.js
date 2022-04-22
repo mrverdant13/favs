@@ -1,4 +1,4 @@
-const FavsList = require('./favs-list.entity');
+const { FavsList } = require('./favs-list.entity');
 
 // Middlewares
 
