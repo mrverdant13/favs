@@ -1,4 +1,5 @@
 const express = require('express');
+const { parsePagination } = require('../../../pagination.middleware');
 const {
   listFavsLists,
   createFavsList,
@@ -11,7 +12,7 @@ const router = express.Router();
 
 router
   .route('/') //
-  .get(listFavsLists)
+  .get(parsePagination, listFavsLists)
   .post(createFavsList);
 
 router

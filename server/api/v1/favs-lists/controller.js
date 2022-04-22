@@ -33,9 +33,10 @@ exports.createFavsList = async (req, res, next) => {
   }
 };
 
-exports.listFavsLists = async (_, res, next) => {
+exports.listFavsLists = async (req, res, next) => {
   try {
-    const favsListDocs = await FavsList.find();
+    const { limit, offset } = req;
+    const favsListDocs = await FavsList.find().skip(offset).limit(limit);
     res.status(200).json(favsListDocs);
   } catch (err) {
     next(err);
