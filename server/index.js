@@ -1,6 +1,7 @@
 const express = require('express');
 const { logErrorOnRequest, reqLogger } = require('./logger');
 const reqIdSetter = require('./request-id');
+const apiV1 = require('./api/v1');
 
 const app = express();
 
@@ -12,6 +13,11 @@ app.use(reqIdSetter);
 
 // Log every incoming request.
 app.use(reqLogger);
+
+// Plug API routes into the app.
+// Using the V1 implementation as default.
+app.use('/api', apiV1);
+app.use('/api/v1', apiV1);
 
 app.use((_, __, next) => next({ statusCode: 404, message: 'Not Found' }));
 
