@@ -41,3 +41,8 @@ exports.listFavsLists = async (_, res, next) => {
     next(err);
   }
 };
+
+exports.getFavsList = async (req, res) => {
+  const favsListDoc = req.favsList;
+  res.status(200).json(favsListDoc);
+};
