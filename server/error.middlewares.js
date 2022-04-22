@@ -6,6 +6,12 @@ const notFoundMiddleware = (_, __, next) => {
   next({ statusCode: 404, message: 'Not Found' });
 };
 
+const validationErrorMiddleware = (err, _, __, next) => {
+  const isValidationError = err?.name === 'ValidationError';
+  if (isValidationError) next({ statusCode: 422, message: err.message });
+  next(err);
+};
+
 const fallbackErrorMiddleware = (err, _, __, next) => {
   logger.info(`Fallback error middleware: ${err}`);
   const { statusCode = 500, message = 'Internal Server Error' } = err;
@@ -26,6 +32,7 @@ const errorHandlerMiddleware = (err, _, res, __) => {
 
 const errorMiddlewares = [
   notFoundMiddleware,
+  validationErrorMiddleware,
   fallbackErrorMiddleware,
   errorLoggerMiddleware,
   errorHandlerMiddleware,
