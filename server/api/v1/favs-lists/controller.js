@@ -19,3 +19,16 @@ exports.appendFavsListById = async (req, res, next) => {
     next(err);
   }
 };
+
+// Request handlers
+
+exports.createFavsList = async (req, res, next) => {
+  try {
+    const { body } = req;
+    const favsListModel = new FavsList(body);
+    const createdFavsListDoc = await favsListModel.save();
+    res.status(201).json(createdFavsListDoc);
+  } catch (err) {
+    next(err);
+  }
+};
