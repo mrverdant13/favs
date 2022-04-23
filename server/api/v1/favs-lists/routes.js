@@ -8,13 +8,13 @@ const {
   removeFavsList,
   appendFavsListById,
 } = require('./controller');
-const { favsListFields } = require('./favs-list.entity');
+const { favsListSortingFields } = require('./favs-list.entity');
 
 const router = express.Router();
 
 router
   .route('/') //
-  .get(parsePagination, parseSorting(favsListFields), listFavsLists)
+  .get(parsePagination, parseSorting(favsListSortingFields), listFavsLists)
   .post(createFavsList);
 
 router

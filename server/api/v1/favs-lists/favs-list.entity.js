@@ -10,9 +10,9 @@ const favsListSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-const fields = Object.keys(favsListSchema.paths);
+const sortingFields = Object.keys(favsListSchema.paths);
 
 module.exports = {
-  favsListFields: fields,
+  favsListSortingFields: sortingFields,
   FavsList: mongoose.model('FavsList', favsListSchema),
 };
