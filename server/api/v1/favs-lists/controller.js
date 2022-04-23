@@ -1,4 +1,4 @@
-const { FavsList } = require('./favs-list.entity');
+const { FavsList, favsListMandatoryPopulation } = require('./favs-list.entity');
 
 // Middlewares
 
@@ -11,7 +11,9 @@ exports.appendFavsListById = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!id) res.status(400).json({ message: 'Missing `id` path param.' });
-    const favsListDoc = await FavsList.findById(id);
+    const favsListDoc = await FavsList.findById(id).populate(
+      favsListMandatoryPopulation,
+    );
     if (!favsListDoc) res.status(404).json({ message: 'Favs list not found' });
     req.favsList = favsListDoc;
     next();
@@ -38,6 +40,7 @@ exports.listFavsLists = async (req, res, next) => {
     const { limit, offset, sortBy, direction } = req;
     const [favsListDocs, totalFavsLists] = await Promise.all([
       FavsList.find()
+        .populate(favsListMandatoryPopulation)
         .sort({ [sortBy]: direction })
         .skip(offset)
         .limit(limit),
