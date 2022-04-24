@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { hash } = require('bcryptjs');
 
 const hiddenFields = {
   password: {
@@ -27,6 +28,14 @@ userSchema.methods.toJSON = function () {
   hiddenFieldNames.forEach((fieldName) => delete userJson[fieldName]);
   return userJson;
 };
+
+// eslint-disable-next-line func-names
+userSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    this.password = await hash(this.password, 10);
+  }
+  next();
+});
 
 const fields = Object.keys(userSchema.paths);
 
