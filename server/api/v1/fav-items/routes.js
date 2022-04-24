@@ -21,7 +21,7 @@ router
 router
   .route('/:id') //
   .get(appendFavItemById, getFavItem)
-  .put(appendFavItemById, editFavItem)
+  .patch(appendFavItemById, editFavItem)
   .delete(appendFavItemById, removeFavItem);
 
 module.exports = router;
