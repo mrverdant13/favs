@@ -9,9 +9,10 @@ const {
   appendFavsListById,
 } = require('./controller');
 const favItemsRouter = require('../fav-items/routes');
-const { favsListSortingFields } = require('./favs-list.entity');
+const { favsListSortingFields, FavsList } = require('./favs-list.entity');
 const { parseFiltering } = require('../../../filtering.middleware');
 const { favItemRelations } = require('../fav-items/fav-item.entity');
+const { checkParentExistence } = require('../../../parent-checker.middleware');
 
 const router = express.Router();
 
@@ -25,6 +26,11 @@ router
   .get(appendFavsListById, getFavsList)
   .delete(appendFavsListById, removeFavsList);
 
-router.use('/:listId/items', parseFiltering(favItemRelations), favItemsRouter);
+router.use(
+  '/:listId/items',
+  checkParentExistence(FavsList, 'listId'),
+  parseFiltering(favItemRelations),
+  favItemsRouter,
+);
 
 module.exports = router;
