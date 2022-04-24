@@ -1,3 +1,4 @@
+const { buildToken } = require('./auth');
 const { User } = require('./user.entity');
 
 // Request handlers
@@ -24,7 +25,9 @@ exports.signIn = async (req, res, next) => {
     if (!isPasswordValid) {
       return next({ statusCode: 401, message: 'Invalid credentials' });
     }
-    return res.status(200).json(userDoc);
+    const { _id: userId } = userDoc;
+    const jwt = buildToken({ id: userId });
+    return res.status(200).json({ ...userDoc.toJSON(), jwt });
   } catch (err) {
     return next(err);
   }
