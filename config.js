@@ -8,6 +8,10 @@ const config = {
     usernane: process.env.DB_USERNANE,
     password: process.env.DB_PASSWORD,
   },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    expiration: process.env.JWT_EXPIRATION,
+  },
 };
 
 module.exports = config;
