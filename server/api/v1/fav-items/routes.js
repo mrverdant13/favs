@@ -11,7 +11,7 @@ const {
 } = require('./controller');
 const { favItemSortingFields } = require('./fav-item.entity');
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router
   .route('/') //

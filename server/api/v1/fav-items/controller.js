@@ -35,9 +35,9 @@ exports.createFavItem = async (req, res, next) => {
 
 exports.listFavItems = async (req, res, next) => {
   try {
-    const { limit, offset, sortBy, direction } = req;
+    const { limit, offset, sortBy, direction, filterBy } = req;
     const [favItemsDocs, totalFavItems] = await Promise.all([
-      FavItem.find()
+      FavItem.find(filterBy)
         .sort({ [sortBy]: direction })
         .skip(offset)
         .limit(limit),
