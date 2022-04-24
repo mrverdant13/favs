@@ -8,7 +8,10 @@ const {
   removeFavsList,
   appendFavsListById,
 } = require('./controller');
+const favItemsRouter = require('../fav-items/routes');
 const { favsListSortingFields } = require('./favs-list.entity');
+const { parseFiltering } = require('../../../filtering.middleware');
+const { favItemRelations } = require('../fav-items/fav-item.entity');
 
 const router = express.Router();
 
@@ -21,5 +24,7 @@ router
   .route('/:id') //
   .get(appendFavsListById, getFavsList)
   .delete(appendFavsListById, removeFavsList);
+
+router.use('/:listId/items', parseFiltering(favItemRelations), favItemsRouter);
 
 module.exports = router;
