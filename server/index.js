@@ -1,6 +1,8 @@
 const express = require('express');
-const { logErrorOnRequest, reqLogger } = require('./logger');
+const { reqLogger } = require('./logger');
+const errorMiddlewares = require('./error.middlewares');
 const reqIdSetter = require('./request-id');
+const apiV1 = require('./api/v1');
 
 const app = express();
 
@@ -13,15 +15,12 @@ app.use(reqIdSetter);
 // Log every incoming request.
 app.use(reqLogger);
 
-app.use((_, __, next) => next({ statusCode: 404, message: 'Not Found' }));
+// Plug API routes into the app.
+// Using the V1 implementation as default.
+app.use('/api', apiV1);
+app.use('/api/v1', apiV1);
 
-// eslint-disable-next-line no-unused-vars
-app.use((err, req, res, __) => {
-  const { statusCode, message } = err;
-  logErrorOnRequest(req, statusCode, message);
-  res
-    .status(statusCode || 500)
-    .json({ message: message || 'Internal Server Error' });
-});
+// Handle errors.
+app.use(...errorMiddlewares);
 
 module.exports = app;
