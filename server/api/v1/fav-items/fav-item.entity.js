@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { isUrl } = require('validator');
 
 const { FavsList } = require('../favs-lists/favs-list.entity');
 
@@ -15,6 +16,10 @@ const baseFields = {
   link: {
     type: String,
     required: true,
+    validate: {
+      validator: (v) => isUrl(v),
+      message: (p) => `${p.value} is not a valid link.`,
+    },
   },
 };
 
