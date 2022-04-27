@@ -1,10 +1,15 @@
 const express = require('express');
+const cors = require('cors');
+
 const { reqLogger } = require('./logger');
 const errorMiddlewares = require('./error.middlewares');
 const reqIdSetter = require('./request-id');
 const apiV1 = require('./api/v1');
 
 const app = express();
+
+// Enable CORS
+app.use(cors());
 
 // Process JSON payload.
 app.use(express.json());
