@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { hash, compare } = require('bcryptjs');
+const { isEmail } = require('validator');
 
 const hiddenFields = {
   password: {
@@ -15,6 +16,10 @@ const baseFields = {
     unique: true,
     trim: true,
     lowercase: true,
+    validate: {
+      validator: (value) => isEmail(value),
+      message: (props) => `${props.value} is not a valid email`,
+    },
   },
   ...hiddenFields,
 };
