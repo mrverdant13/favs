@@ -1,6 +1,7 @@
 const express = require('express');
 const { parsePagination } = require('../../../pagination.middleware');
 const { parseSorting } = require('../../../sorting.middleware');
+const { me } = require('../users/auth.middleware');
 const {
   listFavItems,
   createFavItem,
@@ -15,13 +16,13 @@ const router = express.Router({ mergeParams: true });
 
 router
   .route('/') //
-  .get(parsePagination, parseSorting(favItemSortingFields), listFavItems)
-  .post(createFavItem);
+  .get(me, parsePagination, parseSorting(favItemSortingFields), listFavItems)
+  .post(me, createFavItem);
 
 router
   .route('/:id') //
-  .get(appendFavItemById, getFavItem)
-  .patch(appendFavItemById, editFavItem)
-  .delete(appendFavItemById, removeFavItem);
+  .get(me, appendFavItemById, getFavItem)
+  .patch(me, appendFavItemById, editFavItem)
+  .delete(me, appendFavItemById, removeFavItem);
 
 module.exports = router;
