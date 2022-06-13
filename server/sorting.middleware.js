@@ -27,3 +27,28 @@ exports.parseSorting = (fields) => {
     next();
   };
 };
+
+exports.sortingQueryParamsDocs = (sortingFields) => [
+  {
+    in: 'query',
+    name: 'sortBy',
+    description: 'Field to sort by',
+    required: false,
+    schema: {
+      type: 'string',
+      enum: sortingFields,
+      default: defaultSortBy,
+    },
+  },
+  {
+    in: 'query',
+    name: 'direction',
+    description: 'Sort direction',
+    required: false,
+    schema: {
+      type: 'string',
+      enum: directions,
+      default: directions[0],
+    },
+  },
+];
